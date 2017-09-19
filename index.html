@@ -17,6 +17,8 @@
         const recognition = new SpeechRecognition();
         recognition.interimResults = true;
 
+        recognition.lang = 'es-ES';
+
         let p = document.createElement('p');
         const words = document.querySelector('.words');
         words.appendChild(p);
@@ -28,6 +30,10 @@
                 .join('');
 
             p.textContent = transcript;
+            if (e.results[0].isFinal) {
+                p = document.createElement('p');
+                words.appendChild(p);
+            }
         });
 
         recognition.addEventListener('end', recognition.start);
